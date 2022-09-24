@@ -110,6 +110,13 @@ pipeline {
             }
           }
         }
+        stage('Kubesec') {
+                  steps {
+                    container('docker-tools') {
+                      sh 'kubesec scan k8s.yaml'
+                    }
+                  }
+                }
         stage('Container Audit') {
           steps {
             container('docker-tools') {
