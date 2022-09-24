@@ -69,10 +69,11 @@ pipeline {
             }
           }
           post {
-            always {
-              archiveArtifacts allowEmptyArchive: true, artifacts: 'target/spotbugsXml.xml', fingerprint: true, onlyIfSuccessful: false
+              always {
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/spotbugsXml.xml', fingerprint: true, onlyIfSuccessful: false
+                recordIssues enabledForFailure: true, tool: spotBugs()
+              }
             }
-          }
         }
         stage('SCA - Dependency Checker') {
                     steps {
